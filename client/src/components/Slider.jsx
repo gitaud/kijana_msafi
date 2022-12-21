@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material';
 import { sliderItems } from '../data';
 import { mobile } from "../responsive";
 
@@ -11,7 +11,7 @@ const Container = styled.div`
 	display: flex;
 	position: relative; 
 	overflow: hidden;
-	${mobile({ display: "none" })}
+	${mobile({display: "none"})}
 `
 
 const Arrow = styled.div`
@@ -53,6 +53,7 @@ const ImgContainer = styled.div`
 	height: 100%;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 
 `
 const InfoContainer = styled.div`
@@ -74,12 +75,6 @@ const Desc = styled.p `
 	letter-spacing: 3px;
 `
 
-const Price = styled.p`
-	margin: 0px 0px 10px 0px;
-	font-size: 20px;
-	font-weight: 500;
-	letter-spacing: 3px;
-`
 
 const Button = styled.button`
 	padding: 10px;
@@ -111,8 +106,7 @@ const Slider = () => {
 						<InfoContainer>
 							<Title>{item.title}</Title>
 							<Desc>{item.desc}</Desc>
-							<Price>{item.price}</Price>
-							<Button>Order Now</Button>
+							<Button>Contact Us</Button>
 						</InfoContainer>
 					</Slide>
 					))}

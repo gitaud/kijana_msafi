@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Facebook, Twitter, Instagram, Phone, Room, MailOutline } from '@material-ui/icons';
+import { Facebook, Twitter, Instagram, Phone, Room, MailOutline } from '@mui/icons-material';
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -84,8 +84,8 @@ const Footer = () => {
 	return (
 		<Container>
 			<Left>
-				<Logo>NdQ Apparel</Logo>
-				<Desc>NdQ Apparel is the newest way of acquiring your highly unique and designer clothing. Here, you do not just purchase the fabric, you get to own a piece of a totally unique abstract artwork that takes hundreds of man-hours to design. All our designs are done by hand. Hit the shop and grab your next outfit while stocks last</Desc>
+				<Logo>KIJANA MSAFI</Logo>
+				<Desc>Kijana Msafi has existed for over 25 years. Our vast experience in catering and hotel management services ensure you experience top-tier services at your event. Contact us for an appointment </Desc>
 				<SocialContainer>
 					<SocialIcon color="3B5999">
 						<Facebook />
@@ -103,20 +103,15 @@ const Footer = () => {
 				<Title>Useful Links</Title>
 				<List>
 					<ListItem>Home</ListItem>
-					<ListItem>Cart</ListItem>
-					<ListItem>Men's Products</ListItem>
-					<ListItem>Women's Products</ListItem>
-					<ListItem>Kids' Products</ListItem>
-					<ListItem>Stickers</ListItem>
+					<ListItem>Contact Us</ListItem>
 				</List>
 			</Center>
 			<Right>
 
 				<Title>Contact</Title>
-				<ContactItem><Room style={{marginRight: "10px"}}/> Ruaka, Nairobi</ContactItem>
-				<ContactItem><Phone style={{marginRight: "10px"}}/>+254 702 851 503</ContactItem>
-				<ContactItem><MailOutline style={{marginRight: "10px"}}/> dev.gits@gmail.com</ContactItem>
-				<Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+				<ContactItem><Room style={{marginRight: "10px"}}/> Nairobi</ContactItem>
+				<ContactItem><Phone style={{marginRight: "10px"}}/>+254 743 404 997</ContactItem>
+				<ContactItem><MailOutline style={{marginRight: "10px"}}/> kijanamsafi@gmail.com</ContactItem>
 			</Right>
 		</Container>
 	)
