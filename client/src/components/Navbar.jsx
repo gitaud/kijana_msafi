@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
 	height: 60px;
-	width: 100vw;
+	max-width: 100vw;
 	${mobile({ height: "50px", marginBottom: "15px" })}
 `
 

@@ -6,7 +6,7 @@ import { sliderItems } from '../data';
 import { mobile } from "../responsive";
 
 const Container = styled.div`
-	width: 100%;
+	max-width: 100vw;
 	height: 100vh;
 	display: flex;
 	position: relative; 
@@ -58,7 +58,6 @@ const ImgContainer = styled.div`
 `
 const InfoContainer = styled.div`
 	flex: 1;
-	padding-left: 35px;
 `
 
 const Image = styled.img`

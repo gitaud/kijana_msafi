@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 
 const Home = () => {
 	return (
-		<div>
+		<div style={{maxWidth: "100vw"}}>
 			<Announcement />
 			<Navbar />
 			<Slider />
