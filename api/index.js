@@ -11,6 +11,7 @@ const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const orderRoute = require("./routes/order");
 
+mongoose.set('strictQuery', true);
 
 mongoose.connect(process.env.MONGO_URI,
 	{useNewUrlParser: true, 
