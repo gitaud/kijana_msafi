@@ -164,3 +164,8 @@
 	font-weight: 600;
 	cursor: pointer;
 }
+
+.orderButton:disabled,
+.orderButton[disabled] {
+	background-color: gray;
+}

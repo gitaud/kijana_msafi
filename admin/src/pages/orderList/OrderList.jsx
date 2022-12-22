@@ -35,7 +35,7 @@ export default function OrderList() {
 		{
 			field: "location",
 			headerName: "Location",
-			width: 200
+			width: 150
 		},
 		{
 			field: "event",
@@ -45,7 +45,7 @@ export default function OrderList() {
 		{
 			field: "date",
 			headerName: "Date",
-			width: 150,
+			width: 130,
 			renderCell: (params) => {
 				return(
 					<>
@@ -55,9 +55,21 @@ export default function OrderList() {
 			}
 		},
 		{
+			field: "status",
+			headerName: "Status",
+			width: 100,
+			renderCell: (params) => {
+				return (
+					<>
+						<p className={params.row.status}>{params.row.status}</p>
+					</>	
+				)
+			}
+		},
+		{
 			field: "action",
 			headerName: "Action",
-			width: 150,
+			width: 100,
 			renderCell: (params) => {
 				return (
 					<>

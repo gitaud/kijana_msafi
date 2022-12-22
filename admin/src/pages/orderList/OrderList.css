@@ -22,3 +22,15 @@
 	color: red;
 	cursor: pointer;
 }
+
+.pending {
+	color: magenta;
+}
+
+.accepted {
+	color: green;
+}
+
+.fulfilled {
+	color: blue;
+}

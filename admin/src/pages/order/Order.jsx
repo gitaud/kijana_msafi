@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateOrder } from "../../redux/apiCalls";
 import "./Order.css";
 
 export default function Order() {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const appLocation = useLocation();
 	const orderId = appLocation.pathname.split("/")[2];
@@ -28,6 +30,9 @@ export default function Order() {
 		e.preventDefault();
 		console.log(event);
 		updateOrder(orderId, { name, email, location, event, date, status}, dispatch);
+		if (error !== true) {
+			navigate("/orders");
+		}
 	}
 
 	return (
@@ -62,8 +67,7 @@ export default function Order() {
 							<option value="accepted">Accepted</option>
 							<option value="fulfilled" >Fulfilled</option>
 						</select>
-						<button className="orderButton" onClick={handleUpdate}>Update</button>
-						{ isFetching && <div>Sending... </div>}
+						<button className="orderButton" onClick={handleUpdate} disabled={isFetching}>Update</button>
 						{ error && <div className="error">Error! Could not update</div>}
 					</div>
 				</form>
