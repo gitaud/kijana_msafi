@@ -1,0 +1,77 @@
+.newOrder {
+	flex: 4;
+}
+
+.addOrderForm {
+	margin: 20px;
+	padding: 20px;
+	display: flex;
+	align-items: top;
+	-webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75); 
+	box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+}
+
+.orderLeft {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: top;
+}
+
+.orderRight {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: top;
+}
+
+.addOrderItem {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+.addOrderItem > label {
+	color: gray;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.addOrderItem > input {
+	padding: 10px;
+}
+
+.size {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.size > label {
+	margin-left: 15px;
+}
+
+.addOrderItem > select {
+	padding: 10px;
+}
+
+.addOrderButton {
+	margin-top: 40px;
+	padding: 7px 10px;
+	border: none;
+	border-radius: 10px;
+	width: 100px;
+	background-color: darkblue;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+	.addOrderForm {
+		flex-direction: column;
+	}
+}

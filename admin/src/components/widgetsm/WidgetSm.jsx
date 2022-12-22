@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Visibility } from '@material-ui/icons';
+import { Visibility } from '@mui/icons-material';
 import { userRequest } from "../../requestMethods";
 import "./WidgetSm.css";
 

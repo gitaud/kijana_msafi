@@ -1,18 +1,18 @@
 import { loginStart, loginSuccess, loginFailure } from "./userRedux";
 import { 
-	getProductStart, 
-	getProductSuccess, 
-	getProductFailure,
-	deleteProductStart,
-	deleteProductSuccess,
-	deleteProductFailure,
-	updateProductStart,
-	updateProductSuccess,
-	updateProductFailure,
-	addProductStart,
-	addProductSuccess,
-	addProductFailure,
-} from "./productRedux";
+	getOrderStart,
+  getOrderSuccess,
+  getOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
+	updateOrderStart,
+	updateOrderSuccess,
+	updateOrderFailure,
+	addOrderStart,
+	addOrderSuccess,
+	addOrderFailure
+} from "./orderRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 
 export const login = async (dispatch, user) => {
@@ -26,46 +26,58 @@ export const login = async (dispatch, user) => {
 	}
 }
 
-export const getProducts = async (dispatch) => {
-	dispatch(getProductStart());
+export const getOrders = async (dispatch) => {
+	dispatch(getOrderStart());
 	try {
-		const res = await publicRequest.get("/products");
-		dispatch(getProductSuccess(res.data));
+		const res = await userRequest.get("/orders");
+		dispatch(getOrderSuccess(res.data));
 	} catch(err) {
 		console.log(err);
-		dispatch(getProductFailure());
+		dispatch(getOrderFailure());
 	}
 }
 
-export const deleteProduct = async (id, dispatch) => {
-	dispatch(deleteProductStart());
+export const getOneOrder = async(id, dispatch) => {
+	dispatch(getOrderStart());
 	try {
-		await userRequest.delete(`/products/${id}`);
-		dispatch(deleteProductSuccess(id));
+		const res = await userRequest.get(`/orders/${id}`);
+		dispatch(getOrderSuccess(res.data));
 	} catch(err) {
 		console.log(err);
-		dispatch(deleteProductFailure());
+		dispatch(getOrderFailure);
 	}
 }
 
-export const updateProduct = async (id, product, dispatch) => {
-	dispatch(updateProductStart());
+export const deleteOrder = async (id, dispatch) => {
+	dispatch(deleteOrderStart());
 	try {
-		const res = await userRequest.put(`/products/${id}`, { product });
-		dispatch(updateProductSuccess({ id, product: res.data }));
+		await userRequest.delete(`/orders/${id}`);
+		dispatch(deleteOrderSuccess(id));
 	} catch(err) {
 		console.log(err);
-		dispatch(updateProductFailure());
+		dispatch(deleteOrderFailure());
 	}
 }
 
-export const addProduct = async (product, dispatch) => {
-	dispatch(addProductStart());
+export const updateOrder = async (id, order, dispatch) => {
+	dispatch(updateOrderStart());
 	try {
-		const res = await userRequest.post("/products", product);
-		dispatch(addProductSuccess(res.data));
+		const res = await userRequest.put(`/orders/${id}`, { order });
+		console.log(res.data);
+		dispatch(updateOrderSuccess({ id, order: res.data }));
 	} catch(err) {
 		console.log(err);
-		dispatch(addProductFailure());
+		dispatch(updateOrderFailure());
+	}
+}
+
+export const addOrder = async (order, dispatch) => {
+	dispatch(addOrderStart());
+	try {
+		const res = await publicRequest.post("/orders", order);
+		dispatch(addOrderSuccess(res.data));
+	} catch(err) {
+		console.log(err);
+		dispatch(addOrderFailure());
 	}
 }

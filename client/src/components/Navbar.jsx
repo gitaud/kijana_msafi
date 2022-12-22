@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Search, AddIcCall } from '@mui/icons-material';
-import { Badge } from '@mui/base';
 
 import { mobile } from "../responsive";
 

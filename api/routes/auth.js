@@ -16,8 +16,9 @@ router.post("/register", async (req, res) => {
 
 	try {
 		const savedUser = await newUser.save();
-		res.status(201).json(savedUser)
-	}catch(err) {
+		const { password, ...others } = savedUser._doc;
+		res.status(201).json(others);
+	} catch(err) {
 		res.status(500).json(err);
 	}
 	
@@ -49,6 +50,6 @@ router.post("/login", async(req, res) => {
 		console.log(err)
 		return res.status(500).json(err);
 	}
-})
+});
 
 module.exports = router;

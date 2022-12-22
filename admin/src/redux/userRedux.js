@@ -4,6 +4,7 @@ const userSlice = createSlice({
 	name: "user",
 	initialState: {
 		currentUser: null,
+		otherUsers: [],
 		isFetching: false,
 		error: false
 	},
@@ -17,6 +18,62 @@ const userSlice = createSlice({
 			state.error = false;
 		},
 		loginFailure: (state) => {
+			state.isFetching = false;
+			state.error = true;
+		},
+		getUserStart: (state) => {
+			state.isFetching = true;
+			state.error =  false;
+		},
+		getUserSuccess: (state, action) => {
+			state.isFetching = false;
+			state.otherUsers = action.payload;
+		},
+		getUserFailure: (state) => {
+			state.isFetching = false;
+			state.error = true;
+		},
+		// DELETE
+		deleteUserStart: (state) => {
+			state.isFetching = true;
+			state.error =  false;
+		},
+		deleteUserSuccess: (state, action) => {
+			state.isFetching = false;
+			state.Users.splice(
+				state.Users.findIndex(item => item._id === action.payload),
+				1
+			)
+		},
+		deleteUserFailure: (state) => {
+			state.isFetching = false;
+			state.error = true;
+		},
+		// UPDATE User
+		updateUserStart: (state) => {
+			state.isFetching = true;
+			state.error =  false;
+		},
+		updateUserSuccess: (state, action) => {
+			state.isFetching = false;
+			state.Users[
+				state.Users.findIndex(item => item._id === action.payload.id)
+			] = action.payload.User
+		},
+		updateUserFailure: (state) => {
+			state.isFetching = false;
+			state.error = true;
+		},
+		// ADD NEW User
+		addUserStart: (state) => {
+			state.isFetching = true;
+			state.error =  false;
+		},
+		addUserSuccess: (state, action) => {
+			state.isFetching = false;
+			state.Users.push(action.payload)
+		},
+		addUserFailure: (state) => {
 			state.isFetching = false;
 			state.error = true;
 		}

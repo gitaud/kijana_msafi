@@ -9,10 +9,6 @@ export default function NewUser() {
 			</h1>
 			<form className="newUserForm">
 				<div className="newUserItem">
-					<label>Username</label>
-					<input type="text" placeholder="username" />
-				</div>
-				<div className="newUserItem">
 					<label> Full name </label>
 					<input type="text" placeholder='John Smith' />
 				</div>
@@ -33,10 +29,10 @@ export default function NewUser() {
 					<input type="text" placeholder='Nairobi, CBD' />
 				</div>
 				<div className="newUserItem">
-					<label>Active</label>
-					<select name="active" id="active" className="userSelect">
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
+					<label>Admin</label>
+					<select name="is_admin" id="is_admin" className="userSelect">
+						<option value="true">Yes</option>
+						<option value="false">No</option>
 					</select>
 				</div>
 				<button className="newUserButton">Create</button>

@@ -78,7 +78,7 @@ const ContactItem = styled.div`
 `;
 
 const Payment = styled.img`
-	width: 50%;
+	width: 60%;
 `;
 
 const Footer = () => {
@@ -106,6 +106,7 @@ const Footer = () => {
 					<ListItem>Home</ListItem>
 					<ListItem>Contact Us</ListItem>
 				</List>
+				<Payment src="https://recruit.jobwebkenya.com/wp-content/uploads/2021/10/payment.jpg" />
 			</Center>
 			<Right>
 
@@ -113,6 +114,7 @@ const Footer = () => {
 				<ContactItem><Room style={{marginRight: "10px"}}/> Nairobi</ContactItem>
 				<ContactItem><Phone style={{marginRight: "10px"}}/>+254 743 404 997</ContactItem>
 				<ContactItem><MailOutline style={{marginRight: "10px"}}/> kijanamsafi@gmail.com</ContactItem>
+				
 			</Right>
 		</Container>
 	)

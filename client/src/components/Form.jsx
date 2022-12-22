@@ -98,6 +98,7 @@ const FormComponent = () => {
   const [ name, setName ] = useState("");
   const [ location, setLocation ] = useState("");
   const [ event, setEvent ] = useState("");
+  const [ phone, setPhone ] = useState("");
   const [ date, setDate ] = useState("");
   const [ submitting, setSubmitting ] = useState(false);
   const [ error, setError ] = useState(false);
@@ -132,6 +133,10 @@ const FormComponent = () => {
         <FieldContainer>
           <Label>Email: </Label>
           <Field type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
+        </FieldContainer>
+        <FieldContainer>
+          <Label>Phone no: </Label>
+          <Field type="text" value={phone} placeholder="0712 745 676" onChange={(e) => setPhone(e.target.value)} required/>
         </FieldContainer>
         <FieldContainer>
           <Label>Event: </Label>
