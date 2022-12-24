@@ -1,36 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrders } from '../../redux/orderActions';
 import "./WidgetLg.css";
 
 export default function WidgetLg() {
-
-	const user = useSelector(state => state.user.currentUser);
-	let token = user.accessToken;
-	const [orders, setOrders] = useState([]);
-
-	const userRequest = axios.create({
-		baseURL: "http://localhost:5000/api/",
-		headers: { token: `Bearer ${token}`}
-	})
+	const dispatch = useDispatch();
+	const { authToken } = useSelector(state => state.user);
+	const { orders } = useSelector(state => state.order);
 
 	useEffect(() => {
-		const getOrders = async () => {
-			try {
-				const res = await userRequest.get("orders/");
-			setOrders(res.data)
-			} catch(err) {
-				console.log(err);
-			}
-		};
-		getOrders();
-	}, []);
+		if (authToken) {
+			dispatch(getOrders());
+		}
+	}, [dispatch, authToken]);
 	
 	const Button = ({type}) => {
 		return <button className={"widgetLgButton " + type}>{type}</button>
 	}
 
-	return (
+	return ( orders &&
 		<div className="widgetLg">
 			<h3 className="widgetLgTitle">
 				Latest Transactions

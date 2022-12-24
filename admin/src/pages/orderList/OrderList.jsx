@@ -1,24 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@mui/icons-material';
-import { getOrders, deleteOrder } from "../../redux/apiCalls";
+import { deleteOrder } from "../../redux/orderActions";
+import { resetFetch } from "../../redux/orderRedux";
 
 import "./OrderList.css";
 
 export default function OrderList() {
 
 	const dispatch = useDispatch();
-	const orders = useSelector((state) => state.order.orders);
+	const allOrders = useSelector((state) => state.order.orders);
+	const [ orders, setOrders ] = useState([]);
 
 	useEffect(() => {
-		getOrders(dispatch);
-	}, [dispatch]);
-
+		setOrders([...allOrders]);
+		dispatch(resetFetch());
+	}, [allOrders])
 
 	const handleDelete = (id) => {
-		deleteOrder(id, dispatch)
+		dispatch(deleteOrder(id));
 	}
 
 	const columns = [

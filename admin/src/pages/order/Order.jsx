@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateOrder } from "../../redux/apiCalls";
+import { updateOrder } from "../../redux/orderActions";
 import "./Order.css";
 
 export default function Order() {
@@ -11,12 +11,11 @@ export default function Order() {
 
 	const appLocation = useLocation();
 	const orderId = appLocation.pathname.split("/")[2];
-	const { error, isFetching } = useSelector((state) => state.order);
+	const { error, isFetching, fetchSuccessful } = useSelector((state) => state.order);
 
 	const order = useSelector( (state) => 
 		state.order.orders.find((order) => order._id === orderId)	
 	);
-	console.log(order.date);
 
 	const [ name, setName ] = useState(() => order.name);
 	const [ email, setEmail ] = useState(() => order.email);
@@ -28,12 +27,15 @@ export default function Order() {
 	
 	const handleUpdate = (e) => {
 		e.preventDefault();
-		console.log(event);
-		updateOrder(orderId, { name, email, location, event, date, status}, dispatch);
-		if (error !== true) {
+		dispatch(updateOrder({ orderId, name, email, location, event, date, status}))
+
+	}
+
+	useEffect(() => {
+		if (fetchSuccessful) {
 			navigate("/orders");
 		}
-	}
+	}, [navigate, fetchSuccessful])
 
 	return (
 		<div className="order">

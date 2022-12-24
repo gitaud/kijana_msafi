@@ -1,10 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from "@mui/icons-material"
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from "../../redux/userActions";
+import { MailOutline, PermIdentity } from "@mui/icons-material";
 import "./User.css";
 
 export default function User() {
-	return (
+
+	const appLocation = useLocation();
+	const userId = appLocation.pathname.split("/")[2];
+	
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const currUser = useSelector(state => 
+		state.user.otherUsers.filter(
+			user => user._id === userId
+		)[0]
+	)
+	
+	const [user, setUser] = useState({...currUser});
+	
+	const { isFetching, fetchSuccessful, error } = useSelector(state => state.user);
+
+	useEffect(() => {
+		if (fetchSuccessful) {
+			navigate("/users");
+		}
+	}, [navigate, fetchSuccessful])
+
+	const [ username, setUserName ] = useState(() => user.username);
+	const [ email, setEmail ] = useState(() => user.email);
+	const [ password, setPassword ] = useState("");
+	const [ admin, setAdmin ] = useState(() => String(user.isAdmin));
+
+
+	const handleSubmit = () => {
+		let isAdmin;
+		admin === "true" ? isAdmin = true : isAdmin = false;
+		dispatch(updateUser({ userId, username, email, password, isAdmin}))
+	}
+
+
+	return ( user &&
 		<div className="user">
 			<div className="userTitleContainer">
 				<h1 className="userTitle">Edit User</h1>
@@ -16,39 +54,20 @@ export default function User() {
 			</div>
 			<div className="userContainer">
 				<div className="userShow">
-					<div className="userShowTop">
-						<img src="https://avatars.githubusercontent.com/u/32839689?v=4" alt="" className="userShowImg" />
-						<div className="userShowTopTitle">
-							<span className="userShowUsername">
-								Mr Stepper
-							</span>
-							<span className="userShowUserTitle">
-								Therapist
-							</span>
-						</div>
-					</div>
 					<div className="userShowBottom">
 						<span className="userShowTitle">Account Details</span>
 						<div className="userShowInfo">
 							<PermIdentity className="userShowIcon"/>
-							<span className="userShowInfoTitle">mrstepper699</span>
-						</div>
-						<div className="userShowInfo">
-							<CalendarToday className="userShowIcon"/>
-							<span className="userShowInfoTitle">12.13.2015</span>
+							<span className="userShowInfoTitle">{user.username}</span>
 						</div>
 						<span className="userShowTitle">Contact Details</span>
 						<div className="userShowInfo">
-							<PhoneAndroid className="userShowIcon"/>
-							<span className="userShowInfoTitle">+254 101 234 156</span>
-						</div>
-						<div className="userShowInfo">
 							<MailOutline className="userShowIcon"/>
-							<span className="userShowInfoTitle">mrstepper699@gmail.com</span>
+							<span className="userShowInfoTitle">{user.email}</span>
 						</div>
 						<div className="userShowInfo">
-							<LocationSearching className="userShowIcon"/>
-							<span className="userShowInfoTitle">Kanairo, CBD</span>
+							<PermIdentity className="userShowIcon"/>
+							<span className="userShowInfoTitle">{user.isAdmin ? "Is Admin" : "Not Admin"}</span>
 						</div>
 					</div>
 				</div>
@@ -58,34 +77,26 @@ export default function User() {
 						<div className="userUpdateLeft">
 							<div className="userUpdateItem">
 								<label>Username</label>
-								<input type="text" placeholder="mrstepper699" className="userUpdateInput" />
-							</div>
-							<div className="userUpdateItem">
-								<label>Full Name</label>
-								<input type="text" placeholder="Mr Stepper" className="userUpdateInput" />
+								<input type="text" name="username" value={username} placeholder="Name" className="userUpdateInput" onChange={(e) => setUserName(e.target.value)} />
 							</div>
 							<div className="userUpdateItem">
 								<label>Email</label>
-								<input type="email" placeholder="mrstepper699@gmail.com" className="userUpdateInput" />
+								<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@email.com" className="userUpdateInput" />
 							</div>
 							<div className="userUpdateItem">
-								<label>Phone</label>
-								<input type="phone" placeholder="+254 101 234 156" className="userUpdateInput" />
+								<label>Password</label>
+								<input type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="strong password" className="userUpdateInput" />
 							</div>
 							<div className="userUpdateItem">
-								<label>Address</label>
-								<input type="text" placeholder="Kanairo, CBD" className="userUpdateInput" />
+								<select name="admin" id="admin" className="userUpdateInput" value={admin} onChange={(e) => setAdmin(e.target.value)}>
+									<option value="true">Yes</option>
+									<option value="false">No</option>
+								</select>
 							</div>
 						</div>
 						<div className="userUpdateRight">
-							<div className="userUpdateUpload">
-								<label htmlFor="file">
-									<Publish className="userUpdateIcon" />
-								</label>
-								<img src="https://avatars.githubusercontent.com/u/32839689?v=4" alt="" className="userUpdateImg" />
-								<input type="file" id="file" style={{display: "none"}}/>
-							</div>
-							<button className="userUpdateButton">Update</button>
+							<button className="userUpdateButton" disabled={isFetching} onClick={handleSubmit}>Update</button>
+							{ error && <div style={{color: "red"}}>Error! { error} </div>}
 						</div>
 					</form>
 				</div>

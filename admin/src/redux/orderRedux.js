@@ -1,87 +1,114 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+	createOrder,
+	updateOrder,
+	deleteOrder,
+	getOrders,
+	getOneOrder
+} from "./orderActions";
 
 const orderSlice = createSlice({
 	name: "order",
 	initialState: {
 		orders: [],
 		isFetching: false,
-		error: false,
+		error: null,
+		order: null,
+		fetchSuccessful: null
 	},
 	reducers: {
-		// GET ALL
-		getOrderStart: (state) => {
-			state.isFetching = true;
-			state.error =  false;
-		},
-		getOrderSuccess: (state, action) => {
-			state.isFetching = false;
-			state.orders = action.payload;
-		},
-		getOrderFailure: (state) => {
-			state.isFetching = false;
-			state.error = true;
-		},
-		// DELETE
-		deleteOrderStart: (state) => {
-			state.isFetching = true;
-			state.error =  false;
-		},
-		deleteOrderSuccess: (state, action) => {
-			state.isFetching = false;
-			state.orders.splice(
-				state.orders.findIndex(item => item._id === action.payload),
-				1
-			)
-		},
-		deleteOrderFailure: (state) => {
-			state.isFetching = false;
-			state.error = true;
-		},
-		// UPDATE order
-		updateOrderStart: (state) => {
-			state.isFetching = true;
-			state.error =  false;
-		},
-		updateOrderSuccess: (state, action) => {
-			state.isFetching = false;
-			state.orders[
-				state.orders.findIndex(item => item._id === action.payload.id)
-			] = action.payload.order;
-			state.error = false;
-		},
-		updateOrderFailure: (state) => {
-			state.isFetching = false;
-			state.error = true;
-		},
-		// ADD NEW ORDER
-		addOrderStart: (state) => {
-			state.isFetching = true;
-			state.error =  false;
-		},
-		addOrderSuccess: (state, action) => {
-			state.isFetching = false;
-			state.orders.push(action.payload)
-		},
-		addOrderFailure: (state) => {
-			state.isFetching = false;
-			state.error = true;
+		resetFetch: (state) => {
+			state.fetchSuccessful = null;
 		}
 	},
+	extraReducers: {
+		[getOrders.pending]: state => {
+			state.isFetching = true;
+			state.error = false;
+			state.fetchSuccessful = null;
+		},
+		[getOrders.fulfilled]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = false;
+			state.orders = payload;
+			state.fetchSuccessful = true;
+		},
+		[getOrders.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = payload;
+			state.fetchSuccessful = false;
+		},
+		[getOneOrder.pending]: state => {
+			state.isFetching = true;
+			state.error = null;
+			state.fetchSuccessful = null;
+		},
+		[getOneOrder.fulfilled]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = false;
+			state.fetchSuccessful = true;
+			state.order = payload;
+		},
+		[getOneOrder.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.fetchSuccessful = false;
+			state.error = payload;
+		},
+		[createOrder.pending]: state => {
+			state.isFetching = true;
+			state.error = null;
+			state.fetchSuccessful = null;
+		},
+		[createOrder.fulfilled]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = null;
+			state.orders.push(payload);
+			state.fetchSuccessful = true;
+		},
+		[createOrder.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = payload;
+			state.fetchSuccessful = false;
+		},
+		[updateOrder.pending]: (state) => {
+			state.isFetching = true;
+			state.error = null;
+			state.fetchSuccessful = null;
+		},
+		[updateOrder.fulfilled]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = null;
+			state.orders[
+				state.orders.findIndex(item => item._id === payload._id)
+			] = payload;
+			state.fetchSuccessful = true;
+		},
+		[updateOrder.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = payload;
+			state.fetchSuccessful = false;
+		},
+		[deleteOrder.pending]: (state) => {
+			state.isFetching = false;
+			state.error = null;
+			state.fetchSuccessful = null;
+		},
+		[deleteOrder.fulfilled]: (state, { payload }) => {
+			state.isFetching = false;
+			state.orders.splice(
+				state.orders.findIndex(item => item._id === payload), 1	
+			);
+			state.error = null;
+			state.fetchSuccessful = true;
+		},
+		[deleteOrder.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = payload
+			state.fetchSuccessful = false;
+		},
+	}
 });
 
-export const {
-  getOrderStart,
-  getOrderSuccess,
-  getOrderFailure,
-  deleteOrderStart,
-  deleteOrderSuccess,
-  deleteOrderFailure,
-	updateOrderStart,
-	updateOrderSuccess,
-	updateOrderFailure,
-	addOrderStart,
-	addOrderSuccess,
-	addOrderFailure
-} = orderSlice.actions;
 
+export const { resetFetch } = orderSlice.actions;
 export default orderSlice.reducer;

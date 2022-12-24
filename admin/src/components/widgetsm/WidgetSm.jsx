@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Visibility } from '@mui/icons-material';
-import { userRequest } from "../../requestMethods";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from '../../redux/userActions';
 import "./WidgetSm.css";
 
 export default function WidgetSm() {
 
-	const [users, setUsers] = useState([]);
+	const dispatch = useDispatch()
+	const { otherUsers, authToken } = useSelector(state => state.user);
+	const [ users, setUsers ] = useState([])
 
 	useEffect(() => {
-		const getUsers = async () => {
-			try {
-				const res = await userRequest.get("users/?new=true");
-			setUsers(res.data)
-			} catch(err) {
-				console.log(err);
-			}
-		};
-		getUsers();
-	}, []);
+		setUsers([...otherUsers]);
+	}, [])
+
+	useEffect(() => {
+		if (authToken) {
+			dispatch(getUsers());
+		}
+	}, [dispatch, authToken]);
 
 	return (
 		<div className="widgetSm">

@@ -70,6 +70,15 @@
 	cursor: pointer;
 }
 
+.addOrderButton:disabled,
+.addOrderButton[disabled] {
+	color: gray;
+}
+
+.error {
+	color: red;
+}
+
 @media screen and (max-width: 480px) {
 	.addOrderForm {
 		flex-direction: column;

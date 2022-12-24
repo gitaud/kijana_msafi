@@ -1,4 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
+import { 
+	createUser,
+	userLogin,
+	deleteUser,
+	updateUser,
+	getUsers,
+} from "./userActions";
+
+const authToken = localStorage.getItem('authToken') 
+	? localStorage.getItem('authToken')
+	: null
 
 const userSlice = createSlice({
 	name: "user",
@@ -6,79 +17,105 @@ const userSlice = createSlice({
 		currentUser: null,
 		otherUsers: [],
 		isFetching: false,
-		error: false
+		error: null,
+		authToken,
+		loginSuccess: null,
+		fetchSuccessful: null,
 	},
 	reducers: {
-		loginStart: (state) => {
+		resetFetch: (state) => {
+			state.fetchSuccessful = null;
+		}
+	},
+	extraReducers: {
+		// CREATE USER
+		[createUser.pending]: (state) => {
 			state.isFetching = true;
+			state.error = null;
+			state.fetchSuccessful = null
 		},
-		loginSuccess: (state, action) => {
-			state.isFetching = false
-			state.currentUser = action.payload;
-			state.error = false;
-		},
-		loginFailure: (state) => {
+		[createUser.fulfilled]: (state, { payload }) => {
 			state.isFetching = false;
-			state.error = true;
+			state.otherUsers.push(payload);
+			state.error = null;
+			state.fetchSuccessful = true; 
 		},
-		getUserStart: (state) => {
+		[createUser.rejected]: (state, { payload }) => {
+			state.isFetching = false;
+			state.error = payload;
+			state.fetchSuccessful = false;
+		},
+		[userLogin.pending]: (state) => {
 			state.isFetching = true;
-			state.error =  false;
+			state.error = null;
+			state.fetchSuccessful = null;
 		},
-		getUserSuccess: (state, action) => {
+		[userLogin.fulfilled]: (state, { payload }) => {
 			state.isFetching = false;
-			state.otherUsers = action.payload;
+			state.currentUser = payload;
+			state.authToken = payload.accessToken;
+			state.error = null;
+			state.loginSuccess = true;
+			state.fetchSuccessful = null;
 		},
-		getUserFailure: (state) => {
+		[userLogin.rejected]: (state, { payload }) => {
 			state.isFetching = false;
-			state.error = true;
+			state.error = payload;
+			state.fetchSuccessful = false;
 		},
-		// DELETE
-		deleteUserStart: (state) => {
+		[deleteUser.pending]: (state) => {
 			state.isFetching = true;
-			state.error =  false;
+			state.error = null;
+			state.fetchSuccessful = null;
 		},
-		deleteUserSuccess: (state, action) => {
+		[deleteUser.fulfilled]: (state, { payload }) => {
 			state.isFetching = false;
-			state.Users.splice(
-				state.Users.findIndex(item => item._id === action.payload),
-				1
+			state.otherUsers.splice(
+				state.otherUsers.findIndex(item => item._id === payload), 1
 			)
+			state.error = null;
+			state.fetchSuccessful = true;
 		},
-		deleteUserFailure: (state) => {
+		[deleteUser.rejected]: (state, { payload }) => {
 			state.isFetching = false;
-			state.error = true;
+			state.error = payload;
+			state.fetchSuccessful = false;
 		},
-		// UPDATE User
-		updateUserStart: (state) => {
+		[updateUser.pending]: (state) => {
 			state.isFetching = true;
-			state.error =  false;
+			state.error = null;
+			state.fetchSuccessful = null;
 		},
-		updateUserSuccess: (state, action) => {
+		[updateUser.fulfilled]: (state, { payload }) => {
 			state.isFetching = false;
-			state.Users[
-				state.Users.findIndex(item => item._id === action.payload.id)
-			] = action.payload.User
+			state.error = null;
+			state.otherUsers[
+			state.otherUsers.findIndex(item => item._id === payload._id)
+			] = payload;
+			state.fetchSuccessful = true;
 		},
-		updateUserFailure: (state) => {
+		[updateUser.rejected]: (state, { payload }) => {
 			state.isFetching = false;
-			state.error = true;
+			state.error = payload;
+			state.fetchSuccessful = false;
 		},
-		// ADD NEW User
-		addUserStart: (state) => {
+		[getUsers.pending]: state => {
 			state.isFetching = true;
-			state.error =  false;
+			state.error = null;
+			state.fetchSuccessful = null;
 		},
-		addUserSuccess: (state, action) => {
+		[getUsers.fulfilled]: (state, { payload }) => {
+			state.error = false;
 			state.isFetching = false;
-			state.Users.push(action.payload)
+			state.otherUsers = payload;
+			state.fetchSuccessful = true;
 		},
-		addUserFailure: (state) => {
+		[getUsers.rejected]: (state, { payload }) => {
 			state.isFetching = false;
-			state.error = true;
+			state.error = payload;
+			state.fetchSuccessful = false;
 		}
 	}
 });
-
-export const { loginStart, loginSuccess, loginFailure } = userSlice.actions;
+export const { resetFetch } = userSlice.actions; 
 export default userSlice.reducer;
