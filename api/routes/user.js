@@ -1,26 +1,48 @@
 const router = require("express").Router();
-const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require("./verifyToken");
+const CryptoJS =require("crypto-js");
+const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 const User = require('../models/User');
+
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
+	const newUser = new User({
+		username: req.body.username,
+		email: req.body.email,
+		password: CryptoJS.AES.encrypt(req.body.password, process.env.SECRET_PASSPHRASE).toString()
+	});
+
+	try {
+		const savedUser = await newUser.save();
+		const { password, ...others } = savedUser._doc;
+		res.status(201).json(others);
+	} catch(err) {
+		res.status(500).json(err);
+	}
+	
+});
 
 // UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
-	if (req.body.password) {
+	let newUsrDetails= req.body
+	if (newUsrDetails.password !== "") {
 		req.body.password = CryptoJS.AES.encrypt(
 			req.body.password,
 			process.env.SECRET_PASSPHRASE,
 		).toString();
+	} else {
+		delete newUsrDetails["password"];
 	}
 
 	try {
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, 
 			{
-				$set: req.body
+				$set: newUsrDetails
 			}, 
 			{
 				new: true
 			}
 		);
-		res.status(200).json(updatedUser);
+		const { password, ...others } = updatedUser._doc;
+		return res.status(200).json(others);
 	} catch(err) {
 			console.log(err);
 			res.status(500).json(err);
@@ -53,7 +75,7 @@ router.get("/find/:id", verifyTokenAndAdmin, async(req, res) => {
 router.get("/", verifyTokenAndAdmin, async(req, res) => {
 	const query = req.query.new;
 	try {
-		const users = query ? await User.find().sort({_id: -1}).limit(15) : await User.find();
+		const users = query ? await User.find().sort({_id: -1}) : await User.find();
 		res.status(200).json(users);
 	} catch(err) {
 		res.status(500).json(err);

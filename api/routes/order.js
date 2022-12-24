@@ -10,11 +10,10 @@ const Order = require('../models/Order');
 //CREATE
 
 router.post("/", async(req, res) => {
-	const newOrder = new Order(req.body) 
-
 	try {
+		const newOrder = new Order(req.body) 
 		await newOrder.save();
-		res.status(200).json("OK");
+		res.status(200).json(newOrder);
 	}catch(err) {
 		res.status(500).json(err);
 	}
@@ -22,9 +21,10 @@ router.post("/", async(req, res) => {
 
 // UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-	console.log(req.body);
 	try {
-		const updatedOrder = await Order.findByIdAndUpdate(req.params.id, 
+		let orderId = req.params.id
+		if (orderId == undefined) throw "Required fields missing";
+		const updatedOrder = await Order.findByIdAndUpdate(orderId, 
 			{
 				$set: {...req.body.order}
 			}, 
@@ -52,8 +52,9 @@ router.delete("/:id", verifyTokenAndAdmin, async(req, res) => {
 
 //GET USER ORDERS
 router.get("/find/:email", verifyTokenAndAuthorization, async(req, res) => {
-	let email = req.params.email;
 	try {
+		let email = req.params.email;
+		if (email == undefined) throw "Required fields missing";
 		const orders = await Order.find({email: email});
 
 		res.status(200).json(orders);
@@ -65,7 +66,7 @@ router.get("/find/:email", verifyTokenAndAuthorization, async(req, res) => {
 //GET ALL 
 router.get("/", verifyTokenAndAdmin, async(req, res) => {
 	try{
-		let	orders = await Order.find();
+		let	orders = await Order.find().sort({_id: 1});
 		res.status(200).json(orders);
 	} catch(err) {
 		res.status(500).json(err);
@@ -76,7 +77,7 @@ router.get("/", verifyTokenAndAdmin, async(req, res) => {
 router.get("/:id", verifyTokenAndAdmin, async(req, res) => {
 	let orderId = req.params.id;
 	try {
-		let order = await Order.findById(id);
+		let order = await Order.findById(orderId);
 		res.status(200).json([order]);
 	} catch(err) {
 		res.status(500).json(err);
