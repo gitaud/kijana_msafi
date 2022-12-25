@@ -98,7 +98,7 @@ export const updateOrder = createAsyncThunk(
       }
       const { data } = await axios.put(
         `/orders/${orderData.orderId}`,
-        { orderData },
+        {...orderData},
         config 
       )
       return data;

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { 
-	verifyToken,
 	verifyTokenAndAuthorization,
 	verifyTokenAndAdmin
 } = require("./verifyToken");
@@ -22,17 +21,17 @@ router.post("/", async(req, res) => {
 // UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 	try {
+		console.log(req.body);
 		let orderId = req.params.id
 		if (orderId == undefined) throw "Required fields missing";
 		const updatedOrder = await Order.findByIdAndUpdate(orderId, 
 			{
-				$set: {...req.body.order}
+				$set: {...req.body}
 			}, 
 			{
 				new: true
 			}
 		);
-		console.log(updatedOrder);
 		return res.status(200).json(updatedOrder);
 	} catch(err) {
 			console.log(err);
