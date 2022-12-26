@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  admin:
+    container_name: kijanamsafi-admin
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - app
+  
+  client:
+    container_name: kijanamsafi-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends-on:
+        api
+    networks:
+      - app
+  api:
+    container_name: kijanamsafi-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - app
+  
+  webserver:
+    container_name: webserver
+    image: nginx:mainline-alpine
+    restart: unless-stopped
+    ports: "80:80"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      api
+    networks:
+      -app
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email denisgitau12@gmail.com --agree-tos --no-eff-email --staging -d kijanamsafi.ml  -d www.kijanamsafi.ml
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/kijana/node_
+
+networks:
+  app:
+    driver:
+      bridge
