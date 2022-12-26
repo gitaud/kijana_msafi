@@ -7,6 +7,8 @@ services:
       context: ./admin
       dockerfile: Dockerfile
     restart: unless-stopped
+    depends_on:
+      - api
     networks:
       - app
   
@@ -17,7 +19,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     depends-on:
-        api
+      - api
     networks:
       - app
   api:
@@ -40,7 +42,7 @@ services:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
     depends_on:
-      api
+      - api
     networks:
       -app
 
