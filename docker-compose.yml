@@ -35,7 +35,8 @@ services:
     container_name: webserver
     image: nginx:mainline-alpine
     restart: unless-stopped
-    ports: "80:80"
+    ports: 
+      - "80:80"
     volumes:
       - web-root:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
