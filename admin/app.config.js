@@ -2,9 +2,9 @@
   apps : [
     {
       name      : "admin",
-      script    : "npx",
+      script    : "serve",
       interpreter: "none",
-      args: "serve -s build -p 3005"
+      args: "-s build -p 3005"
     }
   ]
 }
