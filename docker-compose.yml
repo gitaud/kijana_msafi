@@ -18,7 +18,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     restart: unless-stopped
-    depends-on:
+    depends_on:
       - api
     networks:
       - app
@@ -65,7 +65,8 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/kijana/node_
+      device: /home/kijana/kijanamsafi/client/src
+      o: bind
 
 networks:
   app:
