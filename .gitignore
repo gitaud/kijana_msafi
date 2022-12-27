@@ -108,6 +108,7 @@ dist
 
 # NGINX Files
 */nginx.conf
+nginx-conf/
 
 # bin files
 bin/
