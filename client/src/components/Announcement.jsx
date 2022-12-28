@@ -16,7 +16,7 @@ const Container = styled.div`
 const Announcement = () => {
 	return (
 		<Container>
-			Request for our services here
+			Request for the best catering services in the city!
 		</Container>
 	)
 }
