@@ -16,7 +16,7 @@ const Container = styled.div`
 const Announcement = () => {
 	return (
 		<Container>
-			Stickers now available! Sizes: A3, A4, A5
+			Request for our services here
 		</Container>
 	)
 }
