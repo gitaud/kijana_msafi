@@ -39,7 +39,12 @@ const FieldContainer = styled.div`
   justify-content: center;
   width: 65%;
   margin: 10px;
-  ${mobile({width: "95%"})}
+  ${mobile({
+    width: "95%",
+    flexDirection: "column",
+    justifyContent: "left",
+    alignItems: "left",
+  })}
 `
 
 const Label = styled.label`
@@ -47,6 +52,12 @@ const Label = styled.label`
   flex: 0.7;
   line-height: 25px;
   font-size: 25px;
+  text-align: left;
+
+  ${mobile({
+    width: "100%",
+    margin: "10px 0 0 5px"
+  })}
 `
 
 const Field = styled.input`
@@ -61,22 +72,31 @@ const Field = styled.input`
   width: 65%;
   background-color: transparent !important;
   border-bottom: 2px solid white;
+
+  ${mobile({
+    width: "100%",
+    margin: "10px 0 0 5px",
+  })}
 `;
 
 const Button = styled.button`
 	padding: 10px;
 	font-size: 20px;
   border: 2px solid #ffffff;
-	background-color: transparent;
+	background-color: #ffffff;
 	cursor: pointer;
-  color: white;
+  color: black;
 
   :hover {
-    border: 2px solid #000000;
-    background-color: #ffffff;
-    color: black;
+    border: 2px solid #ffffff;
+    background-color: transparent;
+    color: white;
     transition: 0.3s;
   }
+
+  ${mobile({
+    marginTop: '15px'
+  })}
 `
 
 const ErrorMessage = styled.p`

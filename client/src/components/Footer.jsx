@@ -6,6 +6,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
 	display: flex;
 	max-width: 100vw;
+	background-color: "fcf1ed";
 	${mobile({ flexDirection: "column" })}
 `;
 
@@ -39,6 +40,14 @@ const SocialIcon = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin-right: 20px;
+
+	& > a {
+		text-decoration: none;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const Center = styled.div`
@@ -62,6 +71,11 @@ const List = styled.ul`
 const ListItem = styled.li`
 	width: 50%;
 	margin-bottom: 10px;
+
+	& > a {
+		text-decoration: none;
+		color: black;
+	}
 `;
 
 const Right = styled.div`
@@ -86,16 +100,22 @@ const Footer = () => {
 		<Container>
 			<Left>
 				<Logo>KIJANA MSAFI</Logo>
-				<Desc>Kijana Msafi has existed for over 25 years. Our vast experience in catering and hotel management services ensure you experience top-tier services at your event. Contact us for an appointment </Desc>
+				<Desc>Kijana Msafi has existed for over 40 years. Our vast experience in catering and hotel management services ensure you experience top-tier services at your event. Contact us for an appointment </Desc>
 				<SocialContainer>
 					<SocialIcon color="3B5999">
-						<Facebook />
+						<a href="https://www.facebook.com/KijanaMsafiRestaurants">
+							<Facebook />
+						</a>
 					</SocialIcon>
 					<SocialIcon color="E4405F">
-						<Instagram />
+						<a href="https://instagram.com/kijanamsafihotel?igshid=YmMyMTA2M2Y=">
+							<Instagram />
+						</a>
 					</SocialIcon>
 					<SocialIcon color="55ACEE">
-						<Twitter />
+						<a href="https://twitter.com/search?q=kijana%20msafi%20hotel&t=yZw-724oV80wFPkr2qSwCw&s=09">
+							<Twitter />
+						</a>
 					</SocialIcon>
 				</SocialContainer>
 			</Left>
@@ -103,8 +123,8 @@ const Footer = () => {
 			<Center>
 				<Title>Useful Links</Title>
 				<List>
-					<ListItem>Home</ListItem>
-					<ListItem>Contact Us</ListItem>
+					<ListItem><a href="#navbar">Home</a></ListItem>
+					<ListItem><a href="#contactForm">Contact Us</a></ListItem>
 				</List>
 				<Payment src="https://recruit.jobwebkenya.com/wp-content/uploads/2021/10/payment.jpg" />
 			</Center>

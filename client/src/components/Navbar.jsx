@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Search, AddIcCall } from '@mui/icons-material';
+import { AddIcCall } from '@mui/icons-material';
 
 import { mobile } from "../responsive";
 
@@ -30,7 +30,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
 	font-weight: bold;
-	${mobile({ fontSize: "24px"})}
+	${mobile({ fontSize: "20px"})}
 `
 
 const Right = styled.div`
@@ -49,35 +49,19 @@ const MenuItem = styled.a`
 	${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `
 
-const Language = styled.span`
+const Image = styled.img`
+	border-radius: 50%;
 	font-size: 14px;
-	cursor: pointer;
-	${mobile({ display: "none" })}
-`
-const SearchContainer = styled.div`
-	border: 0.5px solid lightgray;
-	display: flex;
-	align-items: center;
-	margin-left: 25px;
-	padding: 5px;
-`
-
-const Input = styled.input`
-	border: none;
-	${mobile({ width: "50px" })}
+	height: 35px;
 `
 
 const Navbar = () => {
 
 	return (
-		<Container>
+		<Container id="navbar">
 			<Wrapper>
 				<Left>
-					<Language>EN</Language>
-					<SearchContainer>
-						<Input placeholder="Search"/>
-						<Search style={{color: "gray", fontSize: "16px"}}/>
-					</SearchContainer>
+					<Image src="https://res.cloudinary.com/dctw6ghne/image/upload/v1671541603/kijana_msafi_logo_m1rdia.jpg" />
 				</Left>
 				<Center>
 					<Logo>KIJANA MSAFI</Logo>
