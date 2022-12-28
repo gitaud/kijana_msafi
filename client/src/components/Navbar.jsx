@@ -40,10 +40,12 @@ const Right = styled.div`
 	${mobile({ flex: 2, justifyContent: "center" })}
 `
 
-const MenuItem = styled.div`
+const MenuItem = styled.a`
 	font-size: 14px;
 	cursor: pointer;
 	margin-left: 25px;
+	text-decoration: none;
+	color: black;
 	${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `
 
@@ -81,10 +83,10 @@ const Navbar = () => {
 					<Logo>KIJANA MSAFI</Logo>
 				</Center>
 				<Right>
-					<MenuItem>CONTACT US</MenuItem>
-						<MenuItem>
-							<AddIcCall />
-						</MenuItem>
+					<MenuItem href="#contactForm">CONTACT US</MenuItem>
+					<MenuItem href="#contactForm">
+						<AddIcCall />
+					</MenuItem>
 					
 				</Right>
 			</Wrapper>

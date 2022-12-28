@@ -105,7 +105,7 @@ const Slider = () => {
 						<InfoContainer>
 							<Title>{item.title}</Title>
 							<Desc>{item.desc}</Desc>
-							<Button>Contact Us</Button>
+							<Button onClick={() => window.location="#contactForm"}>Contact Us</Button>
 						</InfoContainer>
 					</Slide>
 					))}
