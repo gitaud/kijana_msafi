@@ -40,6 +40,9 @@ const Right = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	${mobile({
+		marginRight: "10px"
+	})}
 `
 
 const MenuItem = styled.a`
