@@ -9,7 +9,7 @@ const Container = styled.div`
 	max-width: 100vw;
 	background-color: #2f2f2f;
 	color: #ffffff;
-	${mobile({ height: "50px", marginBottom: "15px" })}
+	${mobile({ height: "50px" })}
 `
 
 const Wrapper = styled.div`
@@ -32,7 +32,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
 	font-weight: bold;
-	${mobile({ fontSize: "20px"})}
+	${mobile({ fontSize: "15px"})}
 `
 
 const Right = styled.div`
@@ -40,7 +40,6 @@ const Right = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	${mobile({ flex: 2, justifyContent: "center" })}
 `
 
 const MenuItem = styled.a`
@@ -56,6 +55,9 @@ const Image = styled.img`
 	border-radius: 50%;
 	font-size: 14px;
 	height: 35px;
+	${mobile({
+		marginLeft: "15px"
+	})}
 `
 
 const Navbar = () => {

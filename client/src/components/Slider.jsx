@@ -39,6 +39,7 @@ const InfoContainer = styled.div`
 		background-color: none;
 		background-image: url(${props => props.img});
 		background-size: cover;
+		height: 100%;
 	}
 `
 
@@ -89,10 +90,13 @@ const Slider = () => {
 			interval={5000}
 			duration={700}
 			navButtonsAlwaysVisible={true}
-			indicatorButtonProps={
-				{'position': 'absolute','bottom': '10px', 'margin': '0px'}
-
-			}
+			navButtonsProps={{
+				style: {
+					backgroundColor: 'transparent',
+					color: '#000000'
+				}
+			}}
+			indicators={false}
 		>
 			{sliderItems.map(item => (
 				<Slide bg={item.bg} key={item.id}>
