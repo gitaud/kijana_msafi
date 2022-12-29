@@ -11,7 +11,7 @@ const Slide = styled.div`
 	align-items: center;
 	width: 100vw;
 	height: 500px;
-	background-color: #${props => props.bg}
+	background-color: #${props => props.bg};
 `
 const ImgContainer = styled.div`
 	flex: 1;
@@ -30,6 +30,7 @@ const InfoContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
+	color: #000000;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;

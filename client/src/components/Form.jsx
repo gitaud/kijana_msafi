@@ -10,7 +10,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(31, 31, 31, 0.8);
+  background-color: rgba(15, 15, 15, 0.8);
   padding: 25px;
   padding-bottom: 50px;
   min-height: 500px;

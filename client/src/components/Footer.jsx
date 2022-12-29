@@ -6,7 +6,8 @@ import { mobile } from "../responsive";
 const Container = styled.div`
 	display: flex;
 	max-width: 100vw;
-	background-color: "fcf1ed";
+	background-color: #2f2f2f;
+	color: #ffffff;
 	${mobile({ flexDirection: "column" })}
 `;
 
@@ -34,8 +35,7 @@ const SocialIcon = styled.div`
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	color: white;
-	background-color:#${props => props.color};
+	border: 1px solid #7f7f7f;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -43,8 +43,8 @@ const SocialIcon = styled.div`
 
 	& > a {
 		text-decoration: none;
-		color: white;
 		display: flex;
+		color: #ffffff;
 		align-items: center;
 		justify-content: center;
 	}
@@ -74,7 +74,7 @@ const ListItem = styled.li`
 
 	& > a {
 		text-decoration: none;
-		color: black;
+		color: #ffffff;
 	}
 `;
 

@@ -7,6 +7,8 @@ import { mobile } from "../responsive";
 const Container = styled.div`
 	height: 60px;
 	max-width: 100vw;
+	background-color: #2f2f2f;
+	color: #ffffff;
 	${mobile({ height: "50px", marginBottom: "15px" })}
 `
 
@@ -37,6 +39,7 @@ const Right = styled.div`
 	flex: 1;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	${mobile({ flex: 2, justifyContent: "center" })}
 `
 
@@ -45,7 +48,7 @@ const MenuItem = styled.a`
 	cursor: pointer;
 	margin-left: 25px;
 	text-decoration: none;
-	color: black;
+	color: #ffffff;
 	${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `
 

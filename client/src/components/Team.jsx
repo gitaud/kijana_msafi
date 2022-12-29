@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 
 const Container = styled.div`
+  border-top: 1px solid #7f7f7f;
+  border-bottom: 1px solid #7f7f7f;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f5fafd;
+  color: #000000;
 `;
 
 const ProfileContainer = styled.div`
@@ -30,7 +33,7 @@ const Profile = styled.div`
   width: 65%;
   min-height: 350px;
   flex: 1;
-  background-color: #f5fafd
+  background-color: #f5fafd;
   border-radius: 15px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75); 
 	box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -42,6 +45,8 @@ const Profile = styled.div`
 `;
 
 const Heading = styled.h2`
+  width: 100%;
+  text-align: center;
   margin-top: 10px;
   padding-top: 3px;
   font-size: 23px;
