@@ -17,7 +17,7 @@ const Left = styled.div`
 	flex-direction: column;
 	padding: 20px;
 `
-const Logo = styled.h1`
+const Logo = styled.h2`
 	${mobile({ textAlign: "center" })}
 `;
 
@@ -99,7 +99,7 @@ const Footer = () => {
 	return (
 		<Container>
 			<Left>
-				<Logo>KIJANA MSAFI</Logo>
+				<Logo>KIJANA MSAFI CATERERS</Logo>
 				<Desc>Kijana Msafi has existed for over 40 years. Our vast experience in catering and hotel management services ensure you experience top-tier services at your event. Contact us for an appointment </Desc>
 				<SocialContainer>
 					<SocialIcon color="3B5999">

@@ -67,7 +67,7 @@ const Navbar = () => {
 					<Image src="https://res.cloudinary.com/dctw6ghne/image/upload/v1671541603/kijana_msafi_logo_m1rdia.jpg" />
 				</Left>
 				<Center>
-					<Logo>KIJANA MSAFI</Logo>
+					<Logo>KIJANA MSAFI CATERERS</Logo>
 				</Center>
 				<Right>
 					<MenuItem href="#contactForm">CONTACT US</MenuItem>
