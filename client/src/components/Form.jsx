@@ -133,7 +133,7 @@ const FormComponent = () => {
       setError("Please fill in all fields")
     } else {
       try {
-        await publicRequest.post("orders/", { name, email, location, event, date});
+        await publicRequest.post("orders/", { name, email, location, phone, event, date});
         setSuccess(true)
       } catch(err) {
         setError("Failed! Check your internet or contact us");
