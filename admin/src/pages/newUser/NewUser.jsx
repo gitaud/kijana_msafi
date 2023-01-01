@@ -64,7 +64,7 @@ export default function NewUser() {
 					</select>
 				</div>
 				<button className="newUserButton" onClick={handleSubmit}>Create</button>
-				{ error && <div style={{color: "red"}}>Error! { error } </div>}
+				{ error && <div className="error">Error! { error.data } </div>}
 			</form>
 		</div>
 	)

@@ -42,7 +42,7 @@ export default function Order() {
 			<div className="orderTitleContainer">
 				<h1 className="orderTitle">Order Details</h1>
 				<Link to="/orders/new">
-					<button className="orderAddButton">Create</button>
+					<button className="orderAddButton">New</button>
 				</Link>
 			</div>
 			<div className="orderBottom">

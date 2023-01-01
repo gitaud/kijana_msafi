@@ -1,10 +1,17 @@
 .orderList {
 	flex: 4;
+	width: 100%;
+	min-height: 400px;
 }
 
 .orderListItem {
 	display: flex;
 	align-items: center;
+}
+
+.orderListLink {
+	text-decoration: none;
+	color: #000000;
 }
 
 .orderListEdit {
@@ -21,6 +28,7 @@
 .orderListDelete {
 	color: red;
 	cursor: pointer;
+	margin-right: 3px;
 }
 
 .pending {

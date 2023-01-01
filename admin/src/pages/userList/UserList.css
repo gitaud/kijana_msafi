@@ -1,5 +1,12 @@
 .userList {
 	flex: 4;
+	width: 100%;
+	min-height: 400px;
+}
+
+.userListLink {
+	text-decoration: none;
+	color: #000000;
 }
 
 .userListUser {

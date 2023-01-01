@@ -169,3 +169,13 @@
 .orderButton[disabled] {
 	background-color: gray;
 }
+
+@media screen and (max-width: 450px) {
+	.orderTitleContainer {
+		max-width: 100vw;
+	}
+
+	.orderForm {
+		flex-direction: column;
+	}
+}

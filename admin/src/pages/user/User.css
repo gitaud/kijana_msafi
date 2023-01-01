@@ -160,3 +160,30 @@
 	color: whitesmoke;
 	font-weight: 600;
 }
+
+@media screen and (max-width: 450px) {
+	.userContainer {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.userShow {
+		width: 80%;
+		flex: 1;
+	}
+
+	.userUpdate {
+		width: 80%;
+		margin-left: 0px;
+	}
+
+	.userUpdateForm {
+		flex-direction: column;
+		margin-left: 0px;
+	}
+
+	.userUpdateButton {
+		margin-top: 25px;
+	}
+}

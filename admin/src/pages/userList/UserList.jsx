@@ -21,34 +21,23 @@ export default function UserList() {
 	}, [allUsers])
 
 	const columns = [
-		{ field: "id", headerName: "ID", width: 90 },
-		{ field: "user", headerName: "user", width: 200, renderCell: (params) => {
+		{ field: "user", 
+			headerName: "Username", 
+			flex: 0.33,
+			renderCell: (params) => {
 			return (
-				<div className="userListUser">
-					{params.row.username}
-				</div>
+				<Link className="userListLink" to={"/user/" + params.row._id}>
+					<div className="userListUser">
+						{params.row.username}
+					</div>
+				</Link>
 			)
 		}},
-		{ field: "email", headerName: "Email", width: 130},
-		{ field: "status",
-			headerName: "Status",
-			width: 100
-		},
-		{ field: "isAdmin",
-			headerName: "isAdmin",
-			width: 100,
-			renderCell: (params) => {
-				return(
-					<>
-						{params.row.isAdmin ? <p>Yes </p> : <p>No</p>}
-					</>	
-				)
-			}
-		},
+		{ field: "email", headerName: "Email", flex: 0.33 },
 		{
 			field: "action",
 			headerName: "Action",
-			width: 150,
+			flex: 0.34,
 			renderCell: (params) => {
 				return (
 					<>

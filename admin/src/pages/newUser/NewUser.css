@@ -45,3 +45,15 @@
 	margin-top: 30px;
 	cursor: pointer;
 }
+
+.error {
+	color: #ff0000;
+	margin-top: 15px;
+}
+
+@media screen and (max-width: 450px) {
+	.newUser {
+		max-width: 90%;
+		margin: 25px
+	}
+}

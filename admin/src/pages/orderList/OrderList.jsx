@@ -27,27 +27,24 @@ export default function OrderList() {
 		{ 
 			field: "name",
 			headerName: "Name",
-			width: 150
-		},
-		{ 
-			field: "email",
-			headerName: "Email",
-			width: 200
-		},
-		{
-			field: "location",
-			headerName: "Location",
-			width: 150
+			flex: 0.20,
+			renderCell: (params) => {
+				return(
+					<Link className='orderListLink' to={"/order/" + params.row._id}>
+						<div>{params.row.name}</div>
+					</Link>	
+				)
+			}
 		},
 		{
 			field: "event",
 			headerName: "Event type",
-			width: 200
+			flex: 0.24
 		},
 		{
 			field: "date",
 			headerName: "Date",
-			width: 130,
+			flex: 0.20,
 			renderCell: (params) => {
 				return(
 					<>
@@ -59,7 +56,7 @@ export default function OrderList() {
 		{
 			field: "status",
 			headerName: "Status",
-			width: 100,
+			flex: 0.11,
 			renderCell: (params) => {
 				return (
 					<>
@@ -71,7 +68,7 @@ export default function OrderList() {
 		{
 			field: "action",
 			headerName: "Action",
-			width: 100,
+			flex: 0.25,
 			renderCell: (params) => {
 				return (
 					<>

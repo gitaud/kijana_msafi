@@ -87,7 +87,7 @@ export const getUsers = createAsyncThunk(
       if (err.response && err.response.data.message) {
         return rejectWithValue(err.response.data.message);
       } else {
-        return rejectWithValue(err.response);
+        return rejectWithValue(err.message);
       }
     }
   } 
@@ -114,7 +114,7 @@ export const deleteUser = createAsyncThunk(
       if (err.response && err.response.data.message) {
         return rejectWithValue(err.response.data.message);
       } else {
-        return rejectWithValue(err.response);
+        return rejectWithValue(err.message);
       }
     }
   } 
@@ -143,7 +143,7 @@ export const updateUser = createAsyncThunk(
       if (err.response && err.response.data.message) {
         return rejectWithValue(err.response.data.message);
       } else {
-        return rejectWithValue(err.response);
+        return rejectWithValue(err.message);
       }
     }
   } 

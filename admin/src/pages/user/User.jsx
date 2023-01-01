@@ -96,9 +96,9 @@ export default function User() {
 						</div>
 						<div className="userUpdateRight">
 							<button className="userUpdateButton" disabled={isFetching} onClick={handleSubmit}>Update</button>
-							{ error && <div style={{color: "red"}}>Error! { error} </div>}
 						</div>
 					</form>
+					{ error && <div style={{color: "red", marginTop: "10px"}}>Error! { error.data} </div>}
 				</div>
 			</div>
 		</div>

@@ -83,4 +83,13 @@
 	.addOrderForm {
 		flex-direction: column;
 	}
+
+	.addOrderItem > select {
+		margin-right: 2px;
+	}
+	.addOrderItem > input {
+		margin-right: 2px;
+		margin-bottom: 5px;
+	}
+	
 }

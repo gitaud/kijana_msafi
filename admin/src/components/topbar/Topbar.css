@@ -5,6 +5,7 @@
 	position: sticky;
 	top: 0;
 	z-index: 999;
+	margin-bottom: rgba(123, 123, 123, 0.9);
 }
 
 .topbarWrapper {
@@ -58,4 +59,15 @@
 .link {
 	text-decoration: none;
 	color: inherit;
+}
+
+.nav {
+	display: none;
+}
+
+@media screen and (max-width: 450px) {
+	.nav {
+		display: block;
+		margin: 5px 15px;
+	}
 }
