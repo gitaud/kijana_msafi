@@ -19,6 +19,7 @@ router.post("/register", async (req, res) => {
 		const { password, ...others } = savedUser._doc;
 		res.status(201).json(others);
 	} catch(err) {
+		console.log(err);
 		res.status(500).json(err);
 	}
 	
@@ -41,7 +42,7 @@ router.post("/login", async(req, res) => {
 				isAdmin: user.isAdmin
 			},
 			process.env.JWT_SECRET,
-			{expiresIn: '3d'}
+			{expiresIn: '365d'}
 		);
 
 		const { password, ...others } = user._doc;

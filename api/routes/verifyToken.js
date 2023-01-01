@@ -13,6 +13,7 @@ const verifyToken = (req, res, next) => {
 		});
 
 	} else {
+		console.log('user not authenticated')
 		return res.status(401).json("You are not authenticated");
 	}
 }
@@ -22,7 +23,8 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 		if (req.user.id === req.params.id || req.user.isAdmin) {
 			next();
 		} else {
-			res.status(403).json("You are not allowed to do that!");
+			console.log('Unauthorized attempt');
+			return res.status(403).json("You are not allowed to do that!");
 		}
 	});
 }
@@ -32,7 +34,8 @@ const verifyTokenAndAdmin = (req, res, next) => {
 		if (req.user.isAdmin) {
 			next();
 		} else {
-			res.status(403).json("You are not allowed to do that!");
+			console.log("Unauthorized attempt to do something")
+			return res.status(403).json("You are not allowed to do that!");
 		}
 	});
 }

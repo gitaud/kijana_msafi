@@ -12,10 +12,10 @@ router.post("/", async(req, res) => {
 	try {
 		const newOrder = new Order(req.body) 
 		await newOrder.save();
-		res.status(200).json(newOrder);
+		return res.status(200).json(newOrder);
 	}catch(err) {
 		console.log(err);
-		res.status(500).json(err);
+		return res.status(500).json(err);
 	}
 })
 
@@ -44,9 +44,10 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 router.delete("/:id", verifyTokenAndAdmin, async(req, res) => {
 	try {
 		await Order.findByIdAndDelete(req.params.id);
-		res.status(200).json("Order has been deleted");
+		return res.status(200).json("Order has been deleted");
 	}catch(err) {
-		res.status(500).json(err);
+		console.log(err);
+		return res.status(500).json(err);
 	}
 });
 
@@ -57,9 +58,9 @@ router.get("/find/:email", verifyTokenAndAuthorization, async(req, res) => {
 		if (email == undefined) throw "Required fields missing";
 		const orders = await Order.find({email: email});
 
-		res.status(200).json(orders);
+		return res.status(200).json(orders);
 	}catch(err) {
-		res.status(500).json(err);
+		return res.status(500).json(err);
 	}
 });
 
@@ -67,9 +68,10 @@ router.get("/find/:email", verifyTokenAndAuthorization, async(req, res) => {
 router.get("/", verifyTokenAndAdmin, async(req, res) => {
 	try{
 		let	orders = await Order.find().sort({_id: 1});
-		res.status(200).json(orders);
+		return res.status(200).json(orders);
 	} catch(err) {
-		res.status(500).json(err);
+		console.log(err);
+		return res.status(500).json(err);
 	}
 });
 
@@ -78,9 +80,10 @@ router.get("/:id", verifyTokenAndAdmin, async(req, res) => {
 	let orderId = req.params.id;
 	try {
 		let order = await Order.findById(orderId);
-		res.status(200).json([order]);
+		return res.status(200).json([order]);
 	} catch(err) {
-		res.status(500).json(err);
+		console.log(err);
+		return res.status(500).json(err);
 	}
 })
 
