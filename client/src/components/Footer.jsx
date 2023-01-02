@@ -132,8 +132,8 @@ const Footer = () => {
 
 				<Title>Contact</Title>
 				<ContactItem><Room style={{marginRight: "10px"}}/> Nairobi</ContactItem>
-				<ContactItem><Phone style={{marginRight: "10px"}}/>+254 743 404 997</ContactItem>
-				<ContactItem><MailOutline style={{marginRight: "10px"}}/> kijanamsafi@gmail.com</ContactItem>
+				<ContactItem><Phone style={{marginRight: "10px"}}/>+254 722 697 202</ContactItem>
+				<ContactItem><MailOutline style={{marginRight: "10px"}}/> kijana.msafi@yahoo.com</ContactItem>
 				
 			</Right>
 		</Container>
