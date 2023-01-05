@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 
 const Container = styled.div`
-  border-top: 1px solid #7f7f7f;
-  border-bottom: 1px solid #7f7f7f;
   display: flex;
   flex-direction: column;
   align-items: center;
