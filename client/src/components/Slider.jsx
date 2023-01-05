@@ -27,7 +27,6 @@ const ImgContainer = styled.div`
 `
 const InfoContainer = styled.div`
 	flex: 1;
-	width: 100%;
 	height: 100%;
 	display: flex;
 	color: #000000;
