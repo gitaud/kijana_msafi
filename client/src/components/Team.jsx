@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #f5fafd;
-  color: #000000;
+  color: #2f2f2f;
 `;
 
 const ProfileContainer = styled.div`

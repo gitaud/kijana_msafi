@@ -7,7 +7,7 @@ const Container = styled.div`
 	display: flex;
 	max-width: 100vw;
 	background-color: #2f2f2f;
-	color: #ffffff;
+	color: #f5fafd;
 	${mobile({ flexDirection: "column" })}
 `;
 

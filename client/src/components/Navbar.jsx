@@ -8,7 +8,7 @@ const Container = styled.div`
 	height: 60px;
 	max-width: 100vw;
 	background-color: #2f2f2f;
-	color: #ffffff;
+	color: #f5fafd;
 	${mobile({ height: "50px" })}
 `
 
