@@ -1,180 +1,341 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Formik, Form, Field } from 'formik';
 import { mobile } from '../responsive';
-import { publicRequest } from '../requestMethods';
 
 import "./form.css";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(15, 15, 15, 0.8);
-  padding: 25px;
-  padding-bottom: 50px;
-  min-height: 500px;
-  max-width: 100vw;
-  ${mobile({flexDirection: "column"})}
-`;
-
-const FormTitle = styled.h2`
-  color: white;
-  margin-top: 45px;
-  font-size: 40px;
-  text-align: center;
-`
-
-const Form = styled.form`
+  background-color: #f5fafd;
+  color: #13131a;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100%;
+  padding: 35px 15px;
+  min-height: 600px;
+
+  ${mobile({
+    padding: "25px 5px",
+    minHeight: "850px"
+  })}
+`
+
+const Heading = styled.h2`
+  text-align: center;
+  padding: 10px 5px;
+`
+
+const Paragraph = styled.p`
   width: 100%;
+  text-align: center;
+  margin: 5px;
+`
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  transition: all 1.5s ease;
 `;
 
-const FieldContainer = styled.div`
+const ItemLine = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  width: 65%;
-  margin: 10px;
+  width: 100%;
+  min-height: 60px;
+
   ${mobile({
-    width: "95%",
     flexDirection: "column",
-    justifyContent: "left",
-    alignItems: "left",
   })}
 `
 
-const Label = styled.label`
-  color: #ffffff;
-  flex: 0.7;
-  line-height: 25px;
-  font-size: 25px;
-  text-align: left;
-
-  ${mobile({
-    width: "100%",
-    margin: "10px 0 0 5px"
-  })}
-`
-
-const Field = styled.input`
-  flex: 2;
-  font-size: 20px;
-  margin-bottom: 15px;
-  margin-top: 10px;
-  line-height: 25px;
-  outline: none;
-  border: none;
-  color: #ffffff !important;
-  width: 65%;
-  background-color: transparent !important;
-  border-bottom: 2px solid white;
-
-  ${mobile({
-    width: "100%",
-    margin: "10px 0 0 5px",
-  })}
+const SubItem = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 25%;
 `;
 
-const Button = styled.button`
-	padding: 10px;
-	font-size: 20px;
-  border: 2px solid #ffffff;
-	background-color: #ffffff;
-	cursor: pointer;
-  color: black;
 
-  :hover {
-    border: 2px solid #ffffff;
-    background-color: transparent;
-    color: white;
-    transition: 0.3s;
-  }
-
+const Item = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 75px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
   ${mobile({
-    marginTop: '15px'
+    justifyContent: "flex-start",
   })}
+  `;
+
+const Label = styled.label`
+  padding: 1px 5px 1px 10px;;
+  flex: 1;
 `
+  
+  const FormComponent = () => {
 
-const ErrorMessage = styled.p`
-  line-height: 20px;
-  color: rgba(255, 80, 80, 0.8);
-  text-align: center;
-  margin-top: 15px;
-`
-
-const SuccessMessage = styled.p`
-  line-height: 20px;
-  color: rgba(80, 255, 80, 0.8);
-  text-align: center;
-  margin-top: 15px;
-`
-
-const FormComponent = () => {
-  const [ email, setEmail ] = useState("");
-  const [ name, setName ] = useState("");
-  const [ location, setLocation ] = useState("");
-  const [ event, setEvent ] = useState("");
-  const [ phone, setPhone ] = useState("");
-  const [ date, setDate ] = useState("");
-  const [ submitting, setSubmitting ] = useState(false);
-  const [ error, setError ] = useState(false);
-  const [ success, setSuccess ] = useState(false);
-
-  const submitRequest = async (e) => {
-
-    setSubmitting(true);
-    setError(false);
-    setSuccess(false);
-    if (email === "" || name === "" || location === "" || event === "" || date === null ) {
-      setError("Please fill in all fields")
+  const [ slideIndex, setSlideIndex ] = useState(0);
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 3);
     } else {
-      try {
-        await publicRequest.post("orders/", { name, email, location, phone, event, date});
-        setSuccess(true)
-      } catch(err) {
-        setError("Failed! Check your internet or contact us");
-      }
+      setSlideIndex(slideIndex < 3 ? slideIndex + 1 : 0);
     }
-    setSubmitting(false)
-  }
+  } 
 
   return(
-    <Container id="contactForm">
-      <Form autoComplete='off'>
-        <FormTitle>Book Our Services</FormTitle>
-        <FieldContainer>
-          <Label>Name: </Label>
-          <Field type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required/>
-        </FieldContainer>
-        <FieldContainer>
-          <Label>Email: </Label>
-          <Field type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
-        </FieldContainer>
-        <FieldContainer>
-          <Label>Phone no: </Label>
-          <Field type="text" value={phone} placeholder="0712 745 676" onChange={(e) => setPhone(e.target.value)} required/>
-        </FieldContainer>
-        <FieldContainer>
-          <Label>Event: </Label>
-          <Field type="text" value={event} placeholder="Wedding, Birthday, etc" onChange={(e) => setEvent(e.target.value)} required/>
-        </FieldContainer>
-        <FieldContainer>
-          <Label>Your Location: </Label>
-          <Field type="text" value={location} placeholder="Your Location" onChange={(e) => setLocation(e.target.value)} required/>
-        </FieldContainer>
-        <FieldContainer>
-          <Label>Date: </Label>
-          <Field type="date" value={date} onChange={(e) => setDate(e.target.value)} required/>
-        </FieldContainer>
-        <Button disabled={submitting} onClick={(e) => submitRequest(e)}>Book Now</Button>
-        { error && <ErrorMessage> {error} </ErrorMessage> }
-        { success && <SuccessMessage>Sent! Our agent will be in touch shortly</SuccessMessage>}
-      </Form>
-    </Container>  
+    <Container>
+      <>
+        <Heading>Agreement Form</Heading>
+        <Paragraph>The agreement made on {new Date().toDateString()}</Paragraph>
+        <Paragraph>Between Kijana Msafi Ltd of P.O. BOX 12454-00400 Nairobi, email: kijanamsafi@yahoo.com and </Paragraph>
+        <Formik
+          initialValues={{
+            customerName:  "",
+            idNumber:  "",
+            mobileNo:  "",
+            email:  "",
+            boxNo: "",
+            locationResidential:  "",
+            office:  "",
+            dateOfFunction:  "",
+            time: "",
+            venue: "",
+            noOfPeopleAttending: "",
+            kienyejiMukimo: "",
+            pilau: "",
+            chapati: "",
+            whiteRice: "",
+            mixedVegetables: "",
+            salad: "",
+            njahiBlackBeans: "",
+            steamedCabbages: "",
+            beefStew: "",
+            sodaQty: "",
+            chickenNo: "",
+            fruitsNoOfPlates: "",
+            roastedRibs: "",
+            mineralWaterNoOfBottles: "",
+            friedPotatoes: "",
+            ugaliNoOfPlates: "",
+            transportInKms: "",
+            commitmentFeePaymentDate: "",
+            depositFeePaymentDate: "",
+            balancePaymentDate: "",
+            termsAgreed: "",
+          }}
+          onSubmit={(values) => {
+            // do something
+            console.log(values);
+          }}
+
+        >
+          <Form className="form" >
+            <Wrapper slideIndex={slideIndex}>
+              <div className="sub-form" style={ slideIndex !== 0 ? {display: "none"} : {}}>
+                <Paragraph>A. Contact Information</Paragraph>
+                <ItemLine>
+                  <Item>
+                    <Label>Mr/Mrs/Ms:</Label>
+                    <Field className="field" placeholder="e.g. Jane Doe" name="customerName" type="text" />
+                  </Item>
+                  <Item>
+                    <Label>ID Number:</Label>
+                    <Field className="field" placeholder="e.g. 12345678" name="idNumber" type="text" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item>
+                    <Label>Mobile No: </Label>
+                    <Field className="field" placeholder="e.g. 0712 345 678" name="mobileNo" type="text"/>
+                  </Item>
+                  <Item>
+                    <Label>Email: </Label>
+                    <Field className="field" placeholder="example@email.com" name="email" type="email" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item>
+                    <Label>Location-Residential</Label>
+                    <Field className="field" placeholder="e.g. Fulani Estate, Kahawa Sukari" name="locationResidential" type="text"/>
+                  </Item>
+                  <Item>
+                    <Label>Office</Label>
+                    <Field className="field" placeholder="e.g. Moi Av, Nairobi CBD" name="office" type="text"/>
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item>
+                    <Label>Date of Function</Label>
+                    <Field className="field" name="dateOfFunction" type="date" />
+                  </Item>
+                  <Item>
+                    <Label>Time</Label>
+                    <Field className="field" name="time" type="time"/>
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item>
+                    <Label>Venue</Label>
+                    <Field className="field" placeholder="e.g. Spring Fields, Komarock" name="venue" type="text" />
+                  </Item>
+                  <Item>
+                    <Label>No of People</Label>
+                    <Field className="field" name="noOfPeopleAttending" placeholder="eg 150" type="number" />
+                  </Item>
+                </ItemLine>
+                <ItemLine style={{flexDirection: "row", justifyContent: "center"}}>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" disabled={true} type="button">Previous</button>
+                  </Item>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("right")} type="button">Next</button>
+                  </Item>
+                </ItemLine>
+              </div>
+              <div className="sub-form" style={ slideIndex !== 1 ? {display: "none"} : {}}>
+                <Paragraph> B. Main Menu</Paragraph>
+                <ItemLine>
+                  <Item className="check colored-mobile colored">
+                    <Label>1. Kienyeji (Mukimo)</Label>
+                    <Field className="checkbox" type="checkbox" name="kienyejiMukimo" />
+                  </Item>
+                  <Item className="check">
+                    <Label>2. Pilau</Label>
+                    <Field className="checkbox" type="checkbox" name="pilau" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item className="check colored-mobile">
+                    <Label>3. Chapati</Label>
+                    <Field className="checkbox" type="checkbox" name="chapati" />
+                  </Item>
+                  <Item className="check colored">
+                    <Label>4. White Rice</Label>
+                    <Field className="checkbox" type="checkbox" name="whiteRice" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item className="check colored colored-mobile">
+                    <Label>5. Mixed Vegetables</Label>
+                    <Field className="checkbox" type="checkbox" name="mixedVegetables" />
+                  </Item>
+                  <Item className="check">
+                    <Label>6. Salad </Label>
+                    <Field className="checkbox" type="checkbox" name="salad" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item className="check colored-mobile" >
+                    <Label>7. Njahi (Black Beans)</Label>
+                    <Field className="checkbox" type="checkbox" name="njahiBlackBeans" />
+                  </Item>
+                  <Item className="check colored">
+                    <Label>8. Steamed Cabbages</Label>
+                    <Field className="checkbox" type="checkbox" name="steamedCabbages" />
+                  </Item>
+                </ItemLine>
+                <ItemLine>
+                  <Item className="check colored colored-mobile">
+                    <Label>9. Beef Stew</Label>
+                    <Field className="checkbox" type="checkbox" name="beefStew" />
+                  </Item>
+                  <Item />
+                </ItemLine>
+                <ItemLine style={{flexDirection: "row", justifyContent: "center"}}>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("left")} type="button" >Previous</button>
+                  </Item>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("right")} type="button">Next</button>
+                  </Item>
+                </ItemLine>
+              </div>
+              <div className="sub-form" style={ slideIndex !== 2 ? {display: "none"} : {}}>
+                <Paragraph>C. OTHER REQUIREMENTS</Paragraph>
+                  <ItemLine>
+                    <Item>
+                      <Label>(i) Soda (Qty)</Label>
+                      <Field className="field" type="number" name="sodaQty" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                    <Item>
+                      <Label>(ii) Chicken (qty)</Label>
+                      <Field className="field" type="number" name="chickenNo" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                  </ItemLine>
+                  <ItemLine>
+                    <Item>
+                      <Label>(iii) Fruits No of Plates</Label>
+                      <Field className="field" type="number" name="fruitsNoOfPlates" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                    <Item>
+                      <Label>(iv) Roasted Ribs</Label>
+                      <Field className="field" type="number" name="roastedRibs" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                  </ItemLine>
+                  <ItemLine>
+                    <Item>
+                      <Label>(v) Mineral Water (no of bottles)</Label>
+                      <Field className="field" type="number" name="mineralWaterNoOfBottles" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                    <Item>
+                      <Label>(vi) Fried Potatoes</Label>
+                      <Field className="field" type="number" name="friedPotatoes" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                  </ItemLine>
+                  <ItemLine>
+                    <Item>
+                      <Label>(vii) Ugali (No of Plates)</Label>
+                      <Field className="field" type="number" name="ugaliNoOfPlates" />
+                      <Label>Total</Label>
+                      <span className="total">xx</span>
+                    </Item>
+                    <Item></Item>
+                  </ItemLine>
+                <ItemLine style={{flexDirection: "row", justifyContent: "center"}}>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("left")} type="button" >Previous</button>
+                  </Item>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("right")} type="button">Next</button>
+                  </Item>
+                </ItemLine>
+              </div>
+              <div className="sub-form" style={slideIndex !== 3 ? { display: "none"} : {}}>
+              <ItemLine style={{flexDirection: "row", justifyContent: "center"}}>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" onClick={() => handleClick("left")} type="button" >Previous</button>
+                  </Item>
+                  <Item style={{justifyContent: "center"}}>
+                    <button className="bttn" type="submit">Submit</button>
+                  </Item>
+                </ItemLine>
+              </div>
+            </Wrapper>
+          </Form>
+        </Formik>
+      </>
+    </Container>
   )
 }
 

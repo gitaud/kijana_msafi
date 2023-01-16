@@ -1,14 +1,14 @@
 ::placeholder {
-  color: #fafafaec;
+  color: #a3a3aa;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+/* input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 4px;
   margin-right: 2px;
   opacity: 0.6;
   filter: invert(0.8);
-}
+} */
 
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
@@ -17,5 +17,111 @@ input:-webkit-autofill:focus {
 
 input[data-autocompleted] {
   background-color: transparent !important;
-  color: #ffffff !important;
+  color: #13131a !important;
+}
+
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+checkbox:checked {
+  background-color: transparent;
+}
+
+.check {
+  height: 100%;
+}
+
+.colored-mobile {
+  background-color: transparent;
+}
+
+.colored {
+  background-color:  #e8e8f3;
+}
+
+.check:hover {
+  background-color: #fdfdfd; 
+}
+
+.total {
+  flex: 1;
+}
+
+.field {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #13131a;
+  background-color: transparent;
+  flex: 3;
+}
+
+.checkbox {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  flex: 1;
+  cursor: pointer;
+}
+
+.bttn {
+  background-color: #33333a;
+  color: #f5fafd;
+  min-width: 85px;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  font-size: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.bttn:hover {
+  background-color: #1d1d1d;
+}
+
+.bttn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.bttn:focus {
+  background-color: #1d1d1d;
+  -webkit-box-shadow: 0px 0px 3px -2px #33333a; 
+	box-shadow: 0px 0px 3px -2px #33333a; 
+}
+
+.sub-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 80vw;
+  transition: all 1.5s ease;
+  max-width: 90vw;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+@media screen and (max-width: 450px) {
+  .field {
+    margin-right: 15px;
+  }
+  .bttn {
+    width: 56px;
+    height: 40px;
+    font-size: 17px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .colored {
+    background-color: transparent;
+  }
+
+  .colored-mobile {
+    background-color: #fdfdfd;
+  }
+
 }
