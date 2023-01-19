@@ -2,14 +2,6 @@
   color: #a3a3aa;
 }
 
-/* input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 2px;
-  opacity: 0.6;
-  filter: invert(0.8);
-} */
-
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
@@ -56,6 +48,7 @@ checkbox:checked {
   border-bottom: 2px solid #13131a;
   background-color: transparent;
   flex: 3;
+  padding-right: 15px;
 }
 
 .checkbox {
@@ -102,6 +95,34 @@ checkbox:checked {
   max-width: 90vw;
   min-height: 100%;
   max-height: 100%;
+}
+
+.t-border {
+  border-top: 1px solid #000;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.t-border-bottom {
+  border-bottom: 1px solid #000;
+}
+
+tr:hover {
+  background-color: #f5fafd;
+}
+
+td {
+  padding: 10px;
+}
+
+.row-name {
+  padding-left: 15px
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
 }
 
 @media screen and (max-width: 450px) {
