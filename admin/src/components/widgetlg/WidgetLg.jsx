@@ -9,19 +9,25 @@ export default function WidgetLg() {
 	const dispatch = useDispatch();
 	const { authToken } = useSelector(state => state.user);
 	const { orders } = useSelector(state => state.order);
-	dispatch(resetFetch());
+	const [ allOrders, setAllOrders ] = useState([]);
+	
 
 	useEffect(() => {
 		if (authToken) {
 			dispatch(getOrders());
 		}
 	}, [dispatch, authToken]);
+
+	useEffect(() => {
+		setAllOrders([...orders])
+		dispatch(resetFetch());
+	}, [dispatch])
 	
 	const Button = ({type}) => {
 		return <button className={"widgetLgButton " + type}>{type}</button>
 	}
 
-	return ( orders &&
+	return ( allOrders &&
 		<div className="widgetLg">
 			<h3 className="widgetLgTitle">
 				Latest Transactions
@@ -36,7 +42,7 @@ export default function WidgetLg() {
 					</tr>
 				</thead>
 				<tbody>
-					{ orders.slice(0, 10).map((order) => (
+					{ allOrders.slice(0, 10).map((order) => (
 						<tr className="widgetLgTr" key={order._id}>
 							<td className="widgetLgUser">
 								<span className="widgetLgName"><Link className='orderLink' to={`/order/` + order._id}>{order.name}</Link></span>

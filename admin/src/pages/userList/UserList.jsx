@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@mui/icons-material';
-import { deleteUser } from "../../redux/userActions"
+import { deleteUser, getUsers } from "../../redux/userActions"
 import { resetFetch } from "../../redux/userRedux";
 import './UserList.css';
 
 export default function UserList() {
-	const allUsers = useSelector(state => state.user.otherUsers);
-	const [ users, setUsers ] = useState([]);
+
 	const dispatch = useDispatch();
-	dispatch(resetFetch());
+	const { otherUsers, authToken } = useSelector(state => state.user);
+	const [ users, setUsers ] = useState([]);
+	
 	const handleDelete = (id) => {
 		dispatch(deleteUser(id));
 	}
-
+	
+	
 	useEffect(() => {
-		setUsers([...allUsers]);
-	}, [allUsers])
-
+		if (authToken) {
+			dispatch(getUsers());
+		}
+	}, [dispatch, authToken]);
+	
+	useEffect(() => {
+		setUsers([...otherUsers])
+		dispatch(resetFetch());
+	}, [dispatch])
+	
 	const columns = [
 		{ field: "user", 
 			headerName: "Username", 

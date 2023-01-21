@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Visibility } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../../redux/userActions';
+import { getUsers, resetFetch } from '../../redux/userActions';
 import "./WidgetSm.css";
 
 export default function WidgetSm() {
@@ -11,14 +11,15 @@ export default function WidgetSm() {
 	const [ users, setUsers ] = useState([])
 
 	useEffect(() => {
-		setUsers([...otherUsers]);
-	}, [])
-
-	useEffect(() => {
 		if (authToken) {
 			dispatch(getUsers());
 		}
 	}, [dispatch, authToken]);
+
+	useEffect(() => {
+		setUsers([...otherUsers]);
+		dispatch(resetFetch());
+	}, [dispatch]);
 
 	return (
 		<div className="widgetSm">
