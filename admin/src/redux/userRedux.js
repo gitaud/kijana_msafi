@@ -25,6 +25,15 @@ const userSlice = createSlice({
 	reducers: {
 		resetFetch: (state) => {
 			state.fetchSuccessful = null;
+		},
+		logoutUser: (state) => {
+			state.currentUser = null;
+			state.otherUsers = [],
+			state.isFetching = false;
+			state.error = null;
+			state.authToken = null;
+			state.loginSuccess = null;
+			state.fetchSuccessful = null;
 		}
 	},
 	extraReducers: {
@@ -117,5 +126,5 @@ const userSlice = createSlice({
 		}
 	}
 });
-export const { resetFetch } = userSlice.actions; 
+export const { resetFetch, logoutUser } = userSlice.actions; 
 export default userSlice.reducer;

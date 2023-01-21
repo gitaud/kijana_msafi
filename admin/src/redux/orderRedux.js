@@ -19,6 +19,13 @@ const orderSlice = createSlice({
 	reducers: {
 		resetFetch: (state) => {
 			state.fetchSuccessful = null;
+		},
+		logoutOrder: (state) => {
+			state.orders = [];
+			state.isFetching = false;
+			state.error = null;
+			state.order = null;
+			state.fetchSuccessful = null;
 		}
 	},
 	extraReducers: {
@@ -110,5 +117,5 @@ const orderSlice = createSlice({
 });
 
 
-export const { resetFetch } = orderSlice.actions;
+export const { resetFetch, logoutOrder } = orderSlice.actions;
 export default orderSlice.reducer;
