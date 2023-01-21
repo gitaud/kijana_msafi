@@ -112,3 +112,6 @@ nginx-conf/
 
 # bin files
 bin/
+
+#build folder
+*/build/
