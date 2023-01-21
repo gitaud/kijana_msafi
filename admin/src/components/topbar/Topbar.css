@@ -25,6 +25,12 @@
 .topRight {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.logout {
+	color: black;
+	margin-left: 25px;
 }
 
 .topbarIconContainer {
@@ -66,6 +72,9 @@
 }
 
 @media screen and (max-width: 450px) {
+	.topbarWrapper {
+		width: 100%;
+	}
 	.nav {
 		display: block;
 		margin: 5px 15px;
