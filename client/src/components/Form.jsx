@@ -49,17 +49,7 @@ const ItemLine = styled.div`
   ${mobile({
     flexDirection: "column",
   })}
-`
-
-const SubItem = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 25%;
 `;
-
 
 const Item = styled.div`
   flex: 1;
@@ -73,14 +63,14 @@ const Item = styled.div`
   ${mobile({
     justifyContent: "flex-start",
   })}
-  `;
+`;
 
 const Label = styled.label`
   padding: 1px 5px 1px 10px;;
   flex: 1;
-`
+`;
   
-  const FormComponent = () => {
+const FormComponent = () => {
 
   const [ slideIndex, setSlideIndex ] = useState(0);
   const handleClick = (direction) => {
@@ -99,9 +89,9 @@ const Label = styled.label`
         <Paragraph>Between Kijana Msafi Ltd of P.O. BOX 12454-00400 Nairobi, email: kijanamsafi@yahoo.com and </Paragraph>
         <Formik
           initialValues={{
-            customerName:  "",
+            name:  "",
             idNumber:  "",
-            mobileNo:  "",
+            phone:  "",
             email:  "",
             boxNo: "",
             locationResidential:  "",
@@ -145,7 +135,7 @@ const Label = styled.label`
                 <ItemLine>
                   <Item>
                     <Label>Mr/Mrs/Ms:</Label>
-                    <Field className="field" placeholder="e.g. Jane Doe" name="customerName" type="text" required />
+                    <Field className="field" placeholder="e.g. Jane Doe" name="name" type="text" required />
                   </Item>
                   <Item>
                     <Label>ID Number:</Label>
@@ -155,7 +145,7 @@ const Label = styled.label`
                 <ItemLine>
                   <Item>
                     <Label>Mobile No: </Label>
-                    <Field className="field" placeholder="e.g. 0712 345 678" name="mobileNo" type="text" required/>
+                    <Field className="field" placeholder="e.g. 0712 345 678" name="phone" type="text" required/>
                   </Item>
                   <Item>
                     <Label>Email: </Label>
@@ -168,7 +158,7 @@ const Label = styled.label`
                     <Field className="field" placeholder="e.g. Fulani Estate, Kahawa Sukari" name="locationResidential" type="text" required/>
                   </Item>
                   <Item>
-                    <Label>Office</Label>
+                    <Label>Event Venue</Label>
                     <Field className="field" placeholder="e.g. Moi Av, Nairobi CBD" name="office" type="text" required/>
                   </Item>
                 </ItemLine>

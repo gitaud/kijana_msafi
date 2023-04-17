@@ -22,7 +22,6 @@ router.post("/", async(req, res) => {
 // UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 	try {
-		console.log(req.body);
 		let orderId = req.params.id
 		if (orderId == undefined) throw "Required fields missing";
 		const updatedOrder = await Order.findByIdAndUpdate(orderId, 

@@ -198,7 +198,7 @@ const Quotation = () => {
             <Item>(i). After negotiation, one has to pay a commitment fee of not less than Ksh 5,000 to book our services for the particular date</Item>
             <Item>(ii). A deposit of 75% of the total amount must be paid at least two weeks before the event's dte</Item>
             <Item>(iii). The remaining balance must be paid on the date of the function, or any other agreed date</Item>
-            <Item>(iv) We provide services for a duration of 3 hours. We charge Ksh 500 for any extra hour thereafter </Item>
+            <Item>(iv) We provide services for a duration of 3 hours, and charge Ksh 500 for any extra hour thereafter </Item>
             <InnerHeading>NB:</InnerHeading> 
             <Item>(a) We provide: </Item>
             <ItemList>
